@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "VT323", monospace;
+  --font-mono: "Press Start 2P", monospace;
+}
+
+@layer utilities {
+  .glitch-text {
+    position: relative;
+  }
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+  }
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 #0ff;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+  }
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 #f0f;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+  }
+  
+  .scanlines {
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+    background-size: 100% 4px;
+  }
+  
+  .static-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.1;
+    pointer-events: none;
+  }
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 44px, 0); }
+  5% { clip: rect(89px, 9999px, 98px, 0); }
+  10% { clip: rect(43px, 9999px, 12px, 0); }
+  15% { clip: rect(78px, 9999px, 54px, 0); }
+  20% { clip: rect(2px, 9999px, 88px, 0); }
+  25% { clip: rect(33px, 9999px, 22px, 0); }
+  30% { clip: rect(66px, 9999px, 77px, 0); }
+  35% { clip: rect(11px, 9999px, 33px, 0); }
+  40% { clip: rect(99px, 9999px, 44px, 0); }
+  45% { clip: rect(55px, 9999px, 66px, 0); }
+  50% { clip: rect(22px, 9999px, 11px, 0); }
+  55% { clip: rect(77px, 9999px, 88px, 0); }
+  60% { clip: rect(44px, 9999px, 55px, 0); }
+  65% { clip: rect(88px, 9999px, 99px, 0); }
+  70% { clip: rect(33px, 9999px, 22px, 0); }
+  75% { clip: rect(66px, 9999px, 77px, 0); }
+  80% { clip: rect(11px, 9999px, 33px, 0); }
+  85% { clip: rect(99px, 9999px, 44px, 0); }
+  90% { clip: rect(55px, 9999px, 66px, 0); }
+  95% { clip: rect(22px, 9999px, 11px, 0); }
+  100% { clip: rect(77px, 9999px, 88px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  5% { clip: rect(52px, 9999px, 74px, 0); }
+  10% { clip: rect(79px, 9999px, 85px, 0); }
+  15% { clip: rect(75px, 9999px, 5px, 0); }
+  20% { clip: rect(67px, 9999px, 61px, 0); }
+  25% { clip: rect(14px, 9999px, 79px, 0); }
+  30% { clip: rect(1px, 9999px, 66px, 0); }
+  35% { clip: rect(86px, 9999px, 30px, 0); }
+  40% { clip: rect(23px, 9999px, 98px, 0); }
+  45% { clip: rect(85px, 9999px, 72px, 0); }
+  50% { clip: rect(71px, 9999px, 75px, 0); }
+  55% { clip: rect(2px, 9999px, 48px, 0); }
+  60% { clip: rect(30px, 9999px, 16px, 0); }
+  65% { clip: rect(59px, 9999px, 50px, 0); }
+  70% { clip: rect(41px, 9999px, 62px, 0); }
+  75% { clip: rect(2px, 9999px, 82px, 0); }
+  80% { clip: rect(47px, 9999px, 73px, 0); }
+  85% { clip: rect(3px, 9999px, 27px, 0); }
+  90% { clip: rect(26px, 9999px, 55px, 0); }
+  95% { clip: rect(42px, 9999px, 97px, 0); }
+  100% { clip: rect(38px, 9999px, 49px, 0); }
+}
+
+@keyframes screen-tear {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  21% { transform: translateX(5px); }
+  22% { transform: translateX(0); }
+  80% { transform: translateX(0); }
+  81% { transform: translateX(10px); }
+  82% { transform: translateX(-10px); }
+  83% { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+
+.animate-screen-tear {
+  animation: screen-tear 4s infinite;
+}
